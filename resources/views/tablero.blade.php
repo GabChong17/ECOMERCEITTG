@@ -73,7 +73,18 @@
     </div>
       @break
     @case('Contador')
-        dash del Contador    
+    <div class="card-columns">
+
+      <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Pagos</h5>
+            <p class="card-text">Registrar: </p>
+            <a href="{{route('nuevoPago')}}" class="btn btn-primary form-control" >Crear nuevo pago</a>
+          </div>
+      </div>
+  
+        
+    </div> 
         @break
     @case('Cliente')
     <div class="card-columns">
@@ -87,7 +98,7 @@
             <p class="card-text">Registrados: {{$productos ?? ''}}</p>
             <p class="card-text">Concesionados: {{$concesionados ?? ''}}</p>
           </div>
-        </div>
+      </div>
 
         <div class="card">
           <a href="/Preguntas">
@@ -101,6 +112,16 @@
               <p class="card-text">
                 Respuestas recibidas: {{$respuestas ?? ''}}
               </p>
+            </div>
+        </div>
+
+        <div class="card">
+          <a href="{{route('nuevaVenta')}}">
+            <img class="card-img-top" src="/prods/ventas.png"  height="300" alt="Card image cap">
+          </a>
+            <div class="card-body">
+              <h5 class="card-title">Ventas</h5>
+              
             </div>
         </div>
   

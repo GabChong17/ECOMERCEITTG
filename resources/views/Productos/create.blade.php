@@ -28,11 +28,27 @@
       <div class="input-group-append">
         <span class="input-group-text">.00</span>
       </div>
+    </div><br>
+
+    <div class="input-group">
+      <label >Costo:</label>
+      <div class="input-group-prepend">
+        <span class="input-group-text">$</span>
+      </div>
+      <input type="text" name="costo" class="form-control">
+      <div class="input-group-append">
+        <span class="input-group-text">.00</span>
+      </div>
+    </div><br>
+    
+    <div class="input-group">
+      <label >Cantidad:</label>
+      <input type="text" name="cantidad" class="form-control">
     </div>
 
     <div class="form-group">
-        <label for="imagen">Imagen:</label>
-        <input type="file" name="imagen" id="imagen">
+        <label for="imagen">Imagenes:</label>
+        <input type="file" name="imagen[]" id="imagen[]"  multiple="">
     </div>
 
 

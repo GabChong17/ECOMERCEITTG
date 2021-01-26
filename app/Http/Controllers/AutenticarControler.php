@@ -26,6 +26,7 @@ class AutenticarControler extends Controller
     
     public function agregar(Request $request)
     {
+        // dd($request->toArray());
 
         $valores = $request->all();
         if ($valores['password']!=$valores['password2'])
@@ -46,7 +47,7 @@ class AutenticarControler extends Controller
         $registro->save();
 
         Auth::login($registro);
-        event(new UsuarioRegistrado($registro, $request->ip()));
+        // event(new UsuarioRegistrado($registro, $request->ip()));
         return  redirect('/tablero');
     }
     public function validar(Request $request)

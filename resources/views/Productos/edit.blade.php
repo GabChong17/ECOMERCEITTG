@@ -50,9 +50,25 @@
 @endcan
   
       <div class="form-group">
-          <label for="imagen">Imagen:</label>
-          <img src="/prods/{{$producto->imagen}}" alt=""  width="200" class="img-thumnail">
-          <input type="file" name="imagen" id="imagen">
+          <label for="imagen">Imagenes:</label><br>
+          @if($producto->concesionado)
+            @foreach($producto->imagenes as $imagen)
+              <div class="foto">
+                <input type="hidden" value="{{$imagen->id}}">
+                <img src="{{asset('../prods/'.$imagen->ruta)}}"  width="200" class="img-thumnail"><br>
+              </div>
+            @endforeach
+          @else
+            @foreach($producto->imagenes as $imagen)
+              <div class="foto">
+                <input type="hidden" value="{{$imagen->id}}">
+                <img src="{{asset('../prods/'.$imagen->ruta)}}"  width="200" class="img-thumnail"><br>
+                <button type="button" data-toggle="modal"data-target="#borrarFoto" class="btn btn-primary delete">Quitar foto</button>
+              </div>
+            @endforeach
+          @endif
+          <br><br><label for="imagen">Agregar más fotos</label><br>
+          <input type="file" name="imagen[]" id="imagen" multiple="">
       </div>
       <input type="hidden" name="usuario_id" value="{{Auth::id()}}">
       <div class="form-group">
@@ -71,4 +87,38 @@
   
     <input type="submit" class="btn btn-primary" value="Enviar">    
 </form>
+<div class="modal fade" id="borrarFoto" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="myLargeModalLabel">Eliminar definitivamente</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              </div>
+              <form action="{{route('delete.photo')}}" method="post">
+              @csrf
+              @method('delete')
+              <input type="hidden" name="IdFotoProducto" id="IdFotoProducto">
+              <input type="hidden" name="IdProducto" id="IdProducto" value="{{$producto->id}}">
+                  <div class="modal-body">
+                  <p>¿Esta seguro que desea eliminar esta imagen definitivamente?</p>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                          <button type="submit" class="btn btn-primary">Si, Eliminar</button>
+                  </div>
+                  </div>
+              </form>
+      </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@endsection
+@section('escripts2')
+<script>
+  $('.delete').on('click', function(){
+    $div = $(this).closest('.foto');
+     var id = $div.children("input[type=hidden]").val();
+    $("#IdFotoProducto").val(id);
+});
+</script>
 @endsection

@@ -48,7 +48,11 @@
                 @endif
             @endif
         >
-            <td>{{$producto->nombre}} <img src="/prods/{{$producto->imagen}}" width="50" ></td>
+            <td>{{$producto->nombre}} -
+                @foreach($producto->imagenes as $imagen)
+                <img src="{{asset('../prods/'.$imagen->ruta)}}"  width="50" >
+                @endforeach
+            </td>
             <td style="text-align:right">$ {{$producto->precio}}</td>
             <td>
                 <a href="/Productos/{{$producto->id}}/edit" class="btn btn-success">Editar</a>

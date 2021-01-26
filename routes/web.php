@@ -13,7 +13,7 @@ use App\Models\Categoria;
 |
 */
 Route::get('/','IncioControler@index');
-Route::get('tablero','IncioControler@tablero');
+Route::get('tablero','IncioControler@tablero')->name('home');
 Route::get('salir'        , 'AutenticarControler@salir');
 Route::get('autenticar'        , 'AutenticarControler@autenticar');
 Route::get('registrar'        , 'AutenticarControler@registrar');
@@ -33,6 +33,7 @@ Route::resource('Productos','ProductosControler');
 Route::resource('Revisiones', 'RevisarControler', [
     'only' => ['index', 'show', 'update']
 ]);
+Route::delete('/productos/delete','ProductosControler@deletePhoto')->name('delete.photo');
 Route::resource('Preguntas', 'PreguntasControler', [
     'except' => [ 'create' ]
 ]);
@@ -43,4 +44,10 @@ Route::put('_Usuarios/{id}','AjaxControler@updateUsuario');
 Route::post('_Categorias','AjaxControler@storeCategoria');
 Route::delete('_Categorias/{id}','AjaxControler@destroyCategoria');
 
-//cambios
+//ventas
+Route::get('/venta/nueva','VentaController@index')->name('nuevaVenta');    
+Route::post('/venta/create','VentaController@create')->name('venta.create');    
+//pagos 
+Route::get('/pago/nuevo','PagoController@index')->name('nuevoPago');
+Route::get('/pago/pagar/{id}','PagoController@pagar')->name('pagar');
+Route::post('/pago/pagar/finalizar','PagoController@createPago')->name('createPago');
