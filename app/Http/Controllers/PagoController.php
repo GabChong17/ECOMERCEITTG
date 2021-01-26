@@ -29,11 +29,6 @@ class PagoController extends Controller
         $pago->usuario_id = $request->IdUsuario;
         $pago->Total = $request->Total;
         $pago->save();
-        $ventas = venta::where('usuario_id',$request->IdUsuario)->where('pago_entregado',0)->get();
-        foreach($ventas as $venta){
-            $venta->pago_entregado = 1;
-            $venta->save();
-        }
         return redirect()->route('nuevoPago');
     }
 }

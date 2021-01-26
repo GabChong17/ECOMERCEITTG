@@ -43,6 +43,7 @@ Route::get('Preguntar/{producto}','PreguntasControler@create');
 Route::put('_Usuarios/{id}','AjaxControler@updateUsuario');
 Route::post('_Categorias','AjaxControler@storeCategoria');
 Route::delete('_Categorias/{id}','AjaxControler@destroyCategoria');
+Route::put('/_pagos/marcar','AjaxControler@marcarPago');
 
 //ventas
 Route::get('/venta/nueva','VentaController@index')->name('nuevaVenta');    

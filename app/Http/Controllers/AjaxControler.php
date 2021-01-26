@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\venta;
 use App\Models\Usuario;
 use App\Models\Categoria;
+use Illuminate\Http\Request;
 
 
 
@@ -39,5 +40,19 @@ class AjaxControler extends Controller
         }catch (\Illuminate\Database\QueryException $e) {
             return response()->json( ["error" => $e->getMessage() ] ,500);
         }
+    }
+
+    public function marcarPago(Request $request){
+        try{
+            if($request->ajax()){
+                $venta = venta::find($request->IdVenta);
+                $venta->pago_entregado = 1;
+                $venta->save();
+            }
+
+        }catch (\Illuminate\Database\QueryException $e) {
+            return response()->json( ["error" => $e->getMessage() ] ,500);
+        }
+
     }
 }
